@@ -31,6 +31,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     System.out.println("TeleopInit");
     Odometry.init();
+    System.out.println(Odometry.getPosition());
   }
 
   @Override

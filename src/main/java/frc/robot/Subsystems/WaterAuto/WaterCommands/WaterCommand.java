@@ -12,6 +12,11 @@ public abstract class WaterCommand {
     public WaterCommand(){}
 
     /**
+     * Inits the command 
+     */
+    public void init(){}
+
+    /**
      * Updates the command
      */
     public void update(){}

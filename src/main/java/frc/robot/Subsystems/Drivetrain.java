@@ -55,7 +55,7 @@ public abstract class Drivetrain {
     }
 
     /**
-     * Gets the encoder value of the left lead motor
+     * Gets the encoder value of the left lead motor in inches
      */
     public static double getLeftEncoderValue(){
         if(RobotBase.isReal()) 
@@ -64,7 +64,7 @@ public abstract class Drivetrain {
     }
 
     /**
-     * Gets the encoder value of the right lead motor
+     * Gets the encoder value of the right lead motor in inches
      */
     public static double getRightEncoderValue(){
         if(RobotBase.isReal()) 
@@ -86,7 +86,7 @@ public abstract class Drivetrain {
         if(leftMovement>rightMovement && leftMovement!=0){
             leftMovement/=Math.abs(leftMovement);
             rightMovement/=Math.abs(leftMovement);
-        } else if(rightMovement != 0 ){
+        } else if(rightMovement != 0 && rightMovement!=leftMovement){
             rightMovement/=Math.abs(rightMovement);
             leftMovement/=Math.abs(rightMovement);
         }

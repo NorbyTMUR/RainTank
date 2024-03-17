@@ -36,8 +36,10 @@ public abstract class Odometry {
      * Updates the odometry
      */
     public static void update(){
+        //Sets the lastRotation to the true lastRotation
         lastRotation=currentRotation;
 
+        //Get the delta change in encoder values
         double dL = Drivetrain.getLeftEncoderValue()-lastLeftEncoderValue;
         double dR = Drivetrain.getRightEncoderValue()-lastRightEncoderValue;
        

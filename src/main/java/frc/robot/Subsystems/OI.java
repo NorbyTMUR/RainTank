@@ -4,9 +4,11 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.Subsystems.WaterAuto.WaveRunner;
 
 public abstract class OI {
     private static SendableChooser<String> controlModeSelector = new SendableChooser<>(); 
+    private static SendableChooser<String> autoSelector = new SendableChooser<>();
     private static Joystick joystick;
 
     /**
@@ -16,7 +18,14 @@ public abstract class OI {
         //Sets up the controlModeSelector
         controlModeSelector.setDefaultOption("ArcadeDrive", "ArcadeDrive");
         controlModeSelector.addOption("TankDrive", "TankDrive");
-        SmartDashboard.putData(controlModeSelector);
+        SmartDashboard.putData("ControlMode", controlModeSelector);
+
+        //Sets up the autoSelector
+        autoSelector.setDefaultOption(WaveRunner.getOcean()[0].getName(), WaveRunner.getOcean()[0].getName());
+        for(int index = 1; index<WaveRunner.getOcean().length; index++){
+            autoSelector.addOption(WaveRunner.getOcean()[index].getName(), WaveRunner.getOcean()[index].getName());
+        }
+        SmartDashboard.putData("AutoSelector", autoSelector);
 
         //Joystick setup
         joystick = new Joystick(0);
