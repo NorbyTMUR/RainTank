@@ -1,10 +1,11 @@
-package frc.robot.Subsytems;
+package frc.robot.Subsystems;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.RobotBase;
 import frc.robot.Constants.DriveConstants;
 
 public abstract class Drivetrain {
@@ -15,6 +16,10 @@ public abstract class Drivetrain {
     //Motor followers
     private static VictorSPX leftFollower;
     private static VictorSPX rightFollower;
+    
+    //Sim Encoder Values
+    private static double simLeft;
+    private static double simRight;
 
     /**
      * Inits the DriveTrain
@@ -37,6 +42,14 @@ public abstract class Drivetrain {
         rightLeader.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
         
         //Resets the encoders
+        resetEncoders();
+    }
+
+    /**
+     * Zeros the encoders
+     */
+    public static void resetEncoders(){
+        //Resets the encoders
         leftLeader.setSelectedSensorPosition(0, 0, 10);
         rightLeader.setSelectedSensorPosition(0, 0, 10);
     }
@@ -45,14 +58,18 @@ public abstract class Drivetrain {
      * Gets the encoder value of the left lead motor
      */
     public static double getLeftEncoderValue(){
-        return leftLeader.getSelectedSensorPosition();
+        if(RobotBase.isReal()) 
+            return leftLeader.getSelectedSensorPosition()*DriveConstants.tickToFeet;
+        return simLeft*DriveConstants.simConversion;
     }
 
     /**
      * Gets the encoder value of the right lead motor
      */
     public static double getRightEncoderValue(){
-        return leftLeader.getSelectedSensorPosition();
+        if(RobotBase.isReal()) 
+            return rightLeader.getSelectedSensorPosition()*DriveConstants.tickToFeet;
+        return simRight*DriveConstants.simConversion;
     }
 
     /**
@@ -62,21 +79,26 @@ public abstract class Drivetrain {
      */
     public static void arcadeDrive(double foward, double rotation){
         //Movement Math
-        double leftMovement = foward+rotation;
+        double leftMovement = foward-rotation;
         double rightMovement = foward+rotation;
 
-        //Normalizes the speed
+        //Normalizes the speed 
         if(leftMovement>rightMovement && leftMovement!=0){
-            leftMovement/=leftMovement;
-            rightMovement/=leftMovement;
+            leftMovement/=Math.abs(leftMovement);
+            rightMovement/=Math.abs(leftMovement);
         } else if(rightMovement != 0 ){
-            rightMovement/=rightMovement;
-            leftMovement/=rightMovement;
+            rightMovement/=Math.abs(rightMovement);
+            leftMovement/=Math.abs(rightMovement);
         }
 
         //Sets the motors to speed
-        leftLeader.set(VictorSPXControlMode.PercentOutput, leftMovement);
-        rightLeader.set(VictorSPXControlMode.PercentOutput, rightMovement);
+        if(RobotBase.isReal()){
+            leftLeader.set(VictorSPXControlMode.PercentOutput, leftMovement);
+            rightLeader.set(VictorSPXControlMode.PercentOutput, rightMovement);
+        } else {
+            simLeft+=leftMovement;
+            simRight+=rightMovement;
+        }
     }
 
     /**
@@ -85,7 +107,12 @@ public abstract class Drivetrain {
      * @param rightMovement The robot's right side speed
      */
     public static void tankDrive(double leftMovement, double rightMovement){
-        leftLeader.set(VictorSPXControlMode.PercentOutput, leftMovement);
-        rightLeader.set(VictorSPXControlMode.PercentOutput, rightMovement);
+        if(RobotBase.isReal()){
+            leftLeader.set(VictorSPXControlMode.PercentOutput, leftMovement);
+            rightLeader.set(VictorSPXControlMode.PercentOutput, rightMovement);
+        } else {
+            simLeft+=leftMovement;
+            simRight+=rightMovement;
+        }
     }
 }
