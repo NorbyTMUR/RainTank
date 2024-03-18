@@ -32,6 +32,22 @@ public abstract class OI {
     }
 
     /**
+     * Gets the selected auto
+     * @return A int of the index of the selected auto
+     */
+    public static int getSelectedAuto(){
+        String selected = autoSelector.getSelected();
+        for(int index = 0; index<WaveRunner.getOcean().length; index++){
+            if(selected.equals(WaveRunner.getOcean()[index].getName())) return index;
+        }
+        return -1;
+    }   
+
+    public static boolean isZeroed(){
+        return joystick.getRawButton(OperatorConstants.zeroButton);
+    }
+
+    /**
      * Gets the foward axis
      * @return A double of the foward axis
      */

@@ -1,5 +1,6 @@
 package frc.robot.Subsystems.WaterAuto;
 
+import frc.robot.Subsystems.Drivetrain;
 import frc.robot.Subsystems.WaterAuto.WaterCommands.WaterCommand;
 
 public abstract class WaveRunner{
@@ -72,26 +73,31 @@ public abstract class WaveRunner{
             return commands;
         }
     }
-
+    
     /**
      * Starts the waveRunner class
      */
-    public static void init(){
+    public static void init(int indexOfRoutine){
         commandOn=0;
+        ocean[indexOfRoutine].getCommands()[0].init();
     }
 
      /**
      * Updates and runs through all the commands
      */
-    public static void update(WaterCommand[] waterCommands){
-
-        if(commandOn<waterCommands.length){
-            waterCommands[commandOn].update();
-            if(waterCommands[commandOn].isFinished()){
+    public static void update(int indexOfRoutine){
+        WaterCommand[] sea = ocean[indexOfRoutine].getCommands();
+        if(commandOn<sea.length){
+            sea[commandOn].update();
+            if(sea[commandOn].isFinished()){
                 commandOn++;
+                if(commandOn == sea.length){
+                    System.out.println(ocean[indexOfRoutine].getName()+" is finished");
+                    Drivetrain.tankDrive(0,0);
+                } else {
+                    sea[commandOn].init();
+                }
             }
-        } else {
-
         }
     }
 }

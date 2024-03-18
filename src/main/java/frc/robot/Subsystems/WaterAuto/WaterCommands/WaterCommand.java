@@ -1,15 +1,26 @@
 package frc.robot.Subsystems.WaterAuto.WaterCommands;
 
+import frc.robot.Subsystems.WaterAuto.SubType;
+
 /**
  * Super class of all water commands
  */
 public abstract class WaterCommand {
     protected boolean isFinished;
+    protected SubType[] subsystemRequirements;
     
     /**
      * Constructor for the WaterCommand
      */
-    public WaterCommand(){}
+    public WaterCommand(SubType[] subsystemRequirements){}
+
+    /**
+     * Gets the subsystem requirments
+     * @return SubType[] of the subsystem requirments
+     */
+    public SubType[] getRequirements(){
+        return subsystemRequirements;
+    }
 
     /**
      * Inits the command 

@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.wpilibj.RobotBase;
 import frc.robot.Constants.DriveConstants;
 
@@ -52,6 +53,8 @@ public abstract class Drivetrain {
         //Resets the encoders
         leftLeader.setSelectedSensorPosition(0, 0, 10);
         rightLeader.setSelectedSensorPosition(0, 0, 10);
+        simLeft=0;
+        simRight=0;
     }
 
     /**

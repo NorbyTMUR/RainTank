@@ -21,6 +21,10 @@ public abstract class Odometry {
         //Creates the position at starting position
         position = new Vector2(OdometryConstants.odometryStartX, OdometryConstants.odometryStartY);
     
+        zeroValues();
+    }
+
+    public static void zeroValues(){
         //Sets last encoder values to to 0
         lastLeftEncoderValue=0;
         lastRightEncoderValue=0;

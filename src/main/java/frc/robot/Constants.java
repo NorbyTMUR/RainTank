@@ -38,6 +38,8 @@ public final class Constants {
 
         public static final int leftAxis = 2;
         public static final int rightAxis = 3;
+
+        public static final int zeroButton = 0;
     }
 
     public final class AutoTune{

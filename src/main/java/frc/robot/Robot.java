@@ -10,8 +10,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     Drivetrain.init();
-    Odometry.init();
     OI.init();
+    Odometry.init();
     Telemetry.init();
   }
 
@@ -22,16 +22,18 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void autonomousInit() {}
+  public void autonomousInit() {
+    
+  }
 
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+
+  }
 
   @Override
   public void teleopInit() {
-    System.out.println("TeleopInit");
     Odometry.init();
-    System.out.println(Odometry.getPosition());
   }
 
   @Override
@@ -41,5 +43,6 @@ public class Robot extends TimedRobot {
     } else {
       Drivetrain.tankDrive(OI.getLeft(), OI.getRight());
     }
+    
   }
 }
