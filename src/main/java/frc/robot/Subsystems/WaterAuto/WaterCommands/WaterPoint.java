@@ -1,40 +1,51 @@
 package frc.robot.Subsystems.WaterAuto.WaterCommands;
 
-import edu.wpi.first.math.controller.RamseteController;
-import frc.robot.MathUtils.Vector2;
+import frc.robot.MathUtils.Position2d;
+import frc.robot.MathUtils.RamseteController;
+import frc.robot.Subsystems.Drivetrain;
+import frc.robot.Subsystems.Odometry;
 import frc.robot.Subsystems.WaterAuto.SubType;
 
 /**
  * WaterCommand that moves the robot to a specific point and rotation
  */
 public class WaterPoint extends WaterCommand{
-    private Vector2 position;
-    private double rotation;
+    private Position2d desiredPosition;
+    private RamseteController controller;
 
     /**
      * Constructor for the WaterPoint command
      * @param position
      * @param rotation
+     * @param controller A RamseteController that must be errorBased
      */
-    public WaterPoint(Vector2 position, double rotation, RamseteController controller){
+    public WaterPoint(Position2d desiredPosition, RamseteController controller){
         super(new SubType[]{SubType.DriveTrain});
-        this.position=position;
-        this.rotation=rotation;
+        this.desiredPosition = desiredPosition;
+        this.controller = controller;
     }
 
     /**
      * Inits the WaterPoint 
      */
     @Override
-    public void init(){
-        
-    }
+    public void init(){}
 
     /**
      * Updates the WaterPoint
      */
     @Override
     public void update(){
+        //Calculates the movement from the controller based of the current position, and desired position
+        double[] movement = controller.calculate(Odometry.getPosition(), desiredPosition);
+        
+        //If there is no movement, then the command is finished
+        if(movement[0] + movement[1] == 0){
+            isFinished =true;
+            return;
+        }
 
+        //Moves the drivetrain to speed given by movement
+        Drivetrain.tankDrive(movement[0], movement[1]);
     }
 }

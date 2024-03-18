@@ -64,17 +64,10 @@ public class Vector2{
     public Vector2 polar(){
         return new Vector2(Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)), Math.atan2(y, x));
     }
-    
-    /**
-     * Normailzes the X of the vector
-     */
-    public void normX(){
-        this.x = x != 0 ? x/x : 0;
-    }
 
     /**
      * Adds two vector2
-     * @param other Is the vector you want to add
+     * @param other The vector you want to add on the righthand side
      * @return A vector2 added by the other vector2
      */
     public Vector2 add(Vector2 other) {
@@ -83,18 +76,18 @@ public class Vector2{
 
 
     /**
-     * Subtracts two vector2
-     * @param other Is the vector you want to substract
-     * @return A vector2 subtracted by the other vector2
+     * Subtracts two Vector2
+     * @param othe The Vector2 you want to substract on the righthand side
+     * @return A Vector2 subtracted by the other Vector2
      */
     public Vector2 sub(Vector2 other) {
         return new Vector2(this.x - other.x, this.y - other.y);
     }
 
     /**
-     * Mutiplies two vector2
-     * @param other Is the vector you want to mutiplies
-     * @return A vector2 mutiplied by the other vector2
+     * Mutiplies two Vector2
+     * @param other The Vector2 you want to mutiplies
+     * @return A Vector2 mutiplied by the other vector2
      */
     public Vector2 mult(Vector2 other) {
         return new Vector2(this.x * other.x, this.y * other.y);
@@ -102,7 +95,7 @@ public class Vector2{
 
     /**
      * Mutiplies a vector2
-     * @param m Is the value you want to times the vector by
+     * @param m The value you want to times the vector by
      * @return A vector2 mutiplied by m
      */
     public Vector2 mult(double m) {
@@ -127,59 +120,19 @@ public class Vector2{
     }
 
     /**
-     * Rotates a vector2
-     * @param angle Angle to rotate by in degrees
-     * @return A Vector2 of the roatated vector2
+     * Rotates a Vector2
+     * @param angle Angle to rotate by in radians
+     * @return A Vector2 of the roatated Vector2
      */
     public Vector2 rotate(double angle){
-        angle*=Math.PI/180;
         double x_new = x * Math.cos(angle) - y * Math.sin(angle);
         double y_new = x * Math.sin(angle) + y * Math.cos(angle);
         return new Vector2(x_new, y_new);
     }
 
-    /**
-     * Sets the vector2 to a string
-     */
-    @Override
-    public String toString(){
-        return x + ", " + y;
-    }
 
     /**
-     * Gives a vector that faces up
-     * @return A vector with an x and y of 0, 1
-     */
-    public static Vector2 up(){
-        return new Vector2(0,1);
-    }
-
-    /**
-     * Gives a vector that faces down
-     * @return A vector with an x and y of 0, -1
-     */
-    public static Vector2 down(){
-        return new Vector2(0,-1);
-    }
-
-    /**
-     * Gives a vector that faces right
-     * @return A vector with an x and y of -1, 0
-     */
-    public static Vector2 left(){
-        return new Vector2(-1,0);
-    }
-
-     /**
-     * Gives a vector that faces right
-     * @return A vector with an x and y of 1, 0
-     */
-    public static Vector2 right(){
-        return new Vector2(1,0);
-    }
-    
-    /**
-     * Sets the Vectors2 to a translation2D 
+     * Sets the Vector2 to a translation2D 
      * @return a Translation2D
      */
     public Translation2d translation2d(){
@@ -187,23 +140,10 @@ public class Vector2{
     }
 
     /**
-     * Gets the direction of another vector2
-     * @return Returns a Vector2 of the other Vector2 direction
+     * Sets the Vector2 to a string
      */
-    public Vector2 getDirection(Vector2 other){
-        Double otherX = other.getX();
-        Double otherY = other.getY();
-
-        Double Dx = otherX-x;
-        Double Dy = otherY-y;
-
-        Double max = Math.max(Dx, Dy);
-        if(Dx != 0 && max!=0){
-            Dx/=Math.abs(max);
-        }
-        if(Dy != 0 && max!=0){
-            Dy/=Math.abs(max);
-        }
-        return new Vector2(Dx,Dy);
+    @Override
+    public String toString(){
+        return x + ", " + y;
     }
 } 

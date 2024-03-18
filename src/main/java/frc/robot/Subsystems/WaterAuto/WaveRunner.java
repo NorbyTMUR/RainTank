@@ -1,38 +1,54 @@
 package frc.robot.Subsystems.WaterAuto;
 
+import frc.robot.Constants.AutoTune;
+import frc.robot.MathUtils.Position2d;
+import frc.robot.MathUtils.RamseteController;
+import frc.robot.MathUtils.Vector2;
 import frc.robot.Subsystems.Drivetrain;
 import frc.robot.Subsystems.WaterAuto.WaterCommands.*;
 
 public abstract class WaveRunner{
-    private static int commandOn = 0;
+    /**
+     * Index of the the current command
+     */
+    private static int currentCommandIndex;
 
-    //Example Auto
-    private static WaterCommand[] autoOne = new WaterCommand[]{
-        
-    };
+    /**
+     * Index of the AutoRoutine chosen
+     */
+    private static int currentRoutineIndex;
 
-    //Another Example Auto
-    private static WaterCommand[] autoTwo = new WaterCommand[]{
+    /**
+     * Ramsete controller used for WaterPoint commands
+     */
+    private static RamseteController movePointController = 
+        new RamseteController(AutoTune.RAM_POINT_B, AutoTune.RAM_POINT_C, AutoTune.RAM_POINT_SCALE, AutoTune.RAM_POINT_DEAD_ZONE);
 
-    };
-
-    //Another Example Auto
-    private static WaterCommand[] autoThree = new WaterCommand[]{
-
+    /**
+     * AutoExampleOne commands
+     */
+    private static WaterCommand[] exampleOneCommands = new WaterCommand[]{
+        new WaterPoint(new Position2d(new Vector2(8, 8), 0), movePointController)
     };
 
     /**
-     * All of the autoRoutines wrapped in Sea objects 
-     * so they can be easily selected over network tables
+     * AutoExampleTwo commands
+     */
+    private static WaterCommand[] exampleTwoCommands = new WaterCommand[]{
+        new WaterPoint(new Position2d(new Vector2(8, 8), 0), movePointController)
+    };
+
+    /**
+     * All of the auto commands stored in a Sea objects 
+     * so they can be selected over network tables
      */
     private static Sea[] ocean = new Sea[]{
-        new Sea("AutoOne", autoOne),
-        new Sea("AutoTwo", autoTwo),
-        new Sea("AutoThree", autoThree),
+        new Sea("AutoExampleOne", exampleOneCommands),
+        new Sea("AutoExampleTwo", exampleTwoCommands)
     };
 
     /**
-     * Gets the ocean
+     * Gets the ocean variable, which holds all of the auto routines stored in Sea objects
      * @return Sea[] of ocean
      */
     public static Sea[] getOcean(){
@@ -41,7 +57,7 @@ public abstract class WaveRunner{
 
     /**
      * This is a wrapper class for a WaterCommand array, 
-     * it is mean to simplify selecting autos in telemetry
+     * it is meant to simplify selecting autos in telemetry
      */
     public static class Sea {
         private String sendableName;
@@ -78,24 +94,27 @@ public abstract class WaveRunner{
      * Starts the waveRunner class
      */
     public static void init(int indexOfRoutine){
-        commandOn=0;
-        ocean[indexOfRoutine].getCommands()[0].init();
+        currentCommandIndex=0;
+        currentRoutineIndex=indexOfRoutine;
+        ocean[currentRoutineIndex].getCommands()[0].init();
     }
 
      /**
-     * Updates and runs through all the commands
+     * Updates and runs through all the commands sequentially. It firsts update the command that the robot is on, 
+     * then it checks if that command has been finshed, if it is finished it moves to the next command. 
+     * If there is no more commands it sets the robot speed to zero, and prints that the auto is finished
      */
-    public static void update(int indexOfRoutine){
-        WaterCommand[] sea = ocean[indexOfRoutine].getCommands();
-        if(commandOn<sea.length){
-            sea[commandOn].update();
-            if(sea[commandOn].isFinished()){
-                commandOn++;
-                if(commandOn == sea.length){
-                    System.out.println(ocean[indexOfRoutine].getName()+" is finished");
+    public static void update(){
+        WaterCommand[] sea = ocean[currentRoutineIndex].getCommands();
+        if(currentCommandIndex<sea.length){
+            sea[currentCommandIndex].update();
+            if(sea[currentCommandIndex].isFinished()){
+                currentCommandIndex++;
+                if(currentCommandIndex == sea.length){
+                    System.out.println(ocean[currentRoutineIndex].getName()+" is finished");
                     Drivetrain.tankDrive(0,0);
                 } else {
-                    sea[commandOn].init();
+                    sea[currentCommandIndex].init();
                 }
             }
         }

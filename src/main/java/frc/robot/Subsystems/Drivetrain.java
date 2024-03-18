@@ -64,8 +64,8 @@ public abstract class Drivetrain {
      */
     public static double getLeftEncoderValue(){
         if(RobotBase.isReal()) 
-            return leftLeader.getSelectedSensorPosition()*DriveConstants.tickToFeet;
-        return simLeft*DriveConstants.simConversion;
+            return leftLeader.getSelectedSensorPosition()*DriveConstants.TICK_TO_FEET;
+        return simLeft*DriveConstants.SIM_CONVERSION;
     }
 
     /**
@@ -73,8 +73,8 @@ public abstract class Drivetrain {
      */
     public static double getRightEncoderValue(){
         if(RobotBase.isReal()) 
-            return rightLeader.getSelectedSensorPosition()*DriveConstants.tickToFeet;
-        return simRight*DriveConstants.simConversion;
+            return rightLeader.getSelectedSensorPosition()*DriveConstants.TICK_TO_FEET;
+        return simRight*DriveConstants.SIM_CONVERSION;
     }
 
     /**

@@ -5,6 +5,7 @@ import frc.robot.Subsystems.Drivetrain;
 import frc.robot.Subsystems.OI;
 import frc.robot.Subsystems.Odometry;
 import frc.robot.Subsystems.Telemetry;
+import frc.robot.Subsystems.WaterAuto.WaveRunner;
 
 public class Robot extends TimedRobot {
   @Override
@@ -23,12 +24,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    
+    WaveRunner.init(OI.getSelectedAuto());
   }
 
   @Override
   public void autonomousPeriodic() {
-
+    WaveRunner.update();
   }
 
   @Override
@@ -43,6 +44,5 @@ public class Robot extends TimedRobot {
     } else {
       Drivetrain.tankDrive(OI.getLeft(), OI.getRight());
     }
-    
   }
 }

@@ -43,17 +43,13 @@ public abstract class OI {
         return -1;
     }   
 
-    public static boolean isZeroed(){
-        return joystick.getRawButton(OperatorConstants.zeroButton);
-    }
-
     /**
      * Gets the foward axis
      * @return A double of the foward axis
      */
     public static double getForward(){
-        if(Math.abs(joystick.getRawAxis(OperatorConstants.fowardAxis))>OperatorConstants.deadZone){
-            return joystick.getRawAxis(OperatorConstants.fowardAxis);
+        if(Math.abs(joystick.getRawAxis(OperatorConstants.FOWARD_AXIS))>OperatorConstants.DEAD_ZONE){
+            return joystick.getRawAxis(OperatorConstants.FOWARD_AXIS);
         } else {
             return 0;
         }
@@ -63,8 +59,8 @@ public abstract class OI {
      * @return the joystick input for Arcade Drive
      */
     public static double getTurn(){
-        if(Math.abs(joystick.getRawAxis(OperatorConstants.turnAxis))>OperatorConstants.deadZone){
-            return joystick.getRawAxis(OperatorConstants.turnAxis)*OperatorConstants.turnStrength;
+        if(Math.abs(joystick.getRawAxis(OperatorConstants.TURN_AXIS))>OperatorConstants.DEAD_ZONE){
+            return joystick.getRawAxis(OperatorConstants.TURN_AXIS)*OperatorConstants.TURN_STRENGTH;
         } else {
             return 0;
         }
@@ -75,8 +71,8 @@ public abstract class OI {
      * @return A double of the left axis
      */
     public static double getLeft(){
-        if(Math.abs(joystick.getRawAxis(OperatorConstants.leftAxis))>OperatorConstants.deadZone){
-            return joystick.getRawAxis(OperatorConstants.leftAxis);
+        if(Math.abs(joystick.getRawAxis(OperatorConstants.LEFT_AXIS))>OperatorConstants.DEAD_ZONE){
+            return joystick.getRawAxis(OperatorConstants.LEFT_AXIS);
         } else {
             return 0;
         }
@@ -87,8 +83,8 @@ public abstract class OI {
      * @return A double of the right axis
      */
     public static double getRight(){
-        if(Math.abs(joystick.getRawAxis(OperatorConstants.rightAxis))>OperatorConstants.deadZone){
-            return joystick.getRawAxis(OperatorConstants.rightAxis);
+        if(Math.abs(joystick.getRawAxis(OperatorConstants.RIGHT_AXIS))>OperatorConstants.DEAD_ZONE){
+            return joystick.getRawAxis(OperatorConstants.RIGHT_AXIS);
         } else {
             return 0;
         }

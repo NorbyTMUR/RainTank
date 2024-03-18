@@ -1,8 +1,7 @@
 package frc.robot.Subsystems;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import frc.robot.Constants.OdometryConstants;
+import frc.robot.MathUtils.Position2d;
 import frc.robot.MathUtils.Vector2;
 
 public abstract class Odometry {
@@ -19,7 +18,7 @@ public abstract class Odometry {
 
     public static void init(){
         //Creates the position at starting position
-        position = new Vector2(OdometryConstants.odometryStartX, OdometryConstants.odometryStartY);
+        position = new Vector2(OdometryConstants.ODOMETRY_START_X, OdometryConstants.ODOMETRY_START_Y);
     
         zeroValues();
     }
@@ -46,18 +45,26 @@ public abstract class Odometry {
         //Get the delta change in encoder values
         double dL = Drivetrain.getLeftEncoderValue()-lastLeftEncoderValue;
         double dR = Drivetrain.getRightEncoderValue()-lastRightEncoderValue;
-       
+        
+        //Gets the distance traveled
         double d = (dL+dR)/2;
-        double theta = (dR-dL)/(2*OdometryConstants.wheelBase);
 
+        //Gets theta
+        double theta = (dR-dL)/(2*OdometryConstants.WHEEL_BASE);
+
+        //Gets the delta change in x and y
         double dX = d*Math.cos(lastRotation+theta/2);
         double dY = d*Math.sin(lastRotation+theta/2);
 
+        //Adds the delta x and y to position
         position = position.add(new Vector2(dX, dY));
+
+        //Adds theta to currentRotation
         currentRotation = addAngle(lastRotation, theta);
 
-        lastLeftEncoderValue=Drivetrain.getLeftEncoderValue();
-        lastRightEncoderValue=Drivetrain.getRightEncoderValue();
+        //Sets the last encoder values to current encoder values
+        lastLeftEncoderValue = Drivetrain.getLeftEncoderValue();
+        lastRightEncoderValue = Drivetrain.getRightEncoderValue();
     }
 
      /**
@@ -73,9 +80,9 @@ public abstract class Odometry {
     
     /**
      * Gets the position and rotation
-     * @return A Pose2d of the robot position
+     * @return A Position2d of the robot position
      */
-    public static Pose2d getPosition(){
-        return new Pose2d(position.translation2d(), new Rotation2d(currentRotation));
+    public static Position2d getPosition(){
+        return new Position2d(position, currentRotation);
     }
 }
