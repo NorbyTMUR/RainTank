@@ -1,16 +1,18 @@
 package frc.robot.Subsystems.WaterAuto.WaterCommands;
 import java.util.HashSet;
 
+import org.ejml.simple.UnsupportedOperation;
+
 import frc.robot.Subsystems.WaterAuto.SubType;
 
-public class ParrelWave extends WaterCommand{
+public class ParallelWave extends WaterCommand{
     private WaterCommand[] commands;
 
     /**
      * Constructor for a ParrelWave
      * @param commands The commands to run parrel to eachother
      */
-    public ParrelWave(WaterCommand[] commands){
+    public ParallelWave(WaterCommand[] commands){
         super(findRequirements(commands));
         this.commands = commands;
     }
@@ -24,14 +26,17 @@ public class ParrelWave extends WaterCommand{
         HashSet<SubType> requirements = new HashSet<>();
         for (WaterCommand command : commands) {
             for (SubType subType : command.getRequirements()) {
+                int size = requirements.size();
                 requirements.add(subType);
+                if(size==requirements.size()) 
+                    throw new UnsupportedOperation("Commands can not use the same subsytem");
             }
         }
         return requirements.toArray(new SubType[0]);
     }
 
     /**
-     * Inits the ParrelWave 
+     * Inits the ParallelWave 
      */
     @Override
     public void init(){
@@ -39,7 +44,7 @@ public class ParrelWave extends WaterCommand{
     }
 
     /**
-     * Updates the ParrelWave
+     * Updates the ParallelWave
      */
     @Override
     public void update(){

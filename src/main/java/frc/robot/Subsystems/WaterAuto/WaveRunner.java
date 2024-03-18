@@ -1,7 +1,7 @@
 package frc.robot.Subsystems.WaterAuto;
 
 import frc.robot.Subsystems.Drivetrain;
-import frc.robot.Subsystems.WaterAuto.WaterCommands.WaterCommand;
+import frc.robot.Subsystems.WaterAuto.WaterCommands.*;
 
 public abstract class WaveRunner{
     private static int commandOn = 0;

@@ -1,5 +1,6 @@
 package frc.robot.Subsystems.WaterAuto.WaterCommands;
 
+import edu.wpi.first.math.controller.RamseteController;
 import frc.robot.MathUtils.Vector2;
 import frc.robot.Subsystems.WaterAuto.SubType;
 
@@ -15,7 +16,7 @@ public class WaterPoint extends WaterCommand{
      * @param position
      * @param rotation
      */
-    public WaterPoint(Vector2 position, double rotation){
+    public WaterPoint(Vector2 position, double rotation, RamseteController controller){
         super(new SubType[]{SubType.DriveTrain});
         this.position=position;
         this.rotation=rotation;
