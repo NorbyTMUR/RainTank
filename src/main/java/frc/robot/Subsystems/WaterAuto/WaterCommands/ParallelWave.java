@@ -40,6 +40,7 @@ public class ParallelWave extends WaterCommand{
      */
     @Override
     public void init(){
+        isFinished=false;
         for(WaterCommand command : commands) command.init();
     }
 

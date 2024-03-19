@@ -21,8 +21,7 @@ public abstract class WaveRunner{
     /**
      * Ramsete controller used for WaterPoint commands
      */
-    private static RamseteController movePointController = 
-        new RamseteController(AutoTune.RAM_POINT_B, AutoTune.RAM_POINT_C, AutoTune.RAM_POINT_SCALE, AutoTune.RAM_POINT_DEAD_ZONE);
+    private static RamseteController movePointController = new RamseteController();
 
     /**
      * AutoExampleOne commands

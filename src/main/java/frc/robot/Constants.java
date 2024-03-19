@@ -53,6 +53,6 @@ public final class Constants {
         public static final double RAM_POINT_SCALE = 0.5;
 
         public static final Position2d RAM_POINT_DEAD_ZONE = 
-            new Position2d(new Vector2(.4, .4), .05);
+            new Position2d(new Vector2(.4, .4), 1);
     }
 }

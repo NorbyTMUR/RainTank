@@ -29,7 +29,9 @@ public class WaterPoint extends WaterCommand{
      * Inits the WaterPoint 
      */
     @Override
-    public void init(){}
+    public void init(){
+        isFinished=false;
+    }
 
     /**
      * Updates the WaterPoint
