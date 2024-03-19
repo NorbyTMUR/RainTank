@@ -27,14 +27,14 @@ public abstract class WaveRunner{
      * AutoExampleOne commands
      */
     private static WaterCommand[] exampleOneCommands = new WaterCommand[]{
-        new WaterPoint(new Position2d(new Vector2(8, 8), 0), movePointController)
+       new WaterPoint(new Position2d(new Vector2(8, 8), 0), movePointController)
     };
 
     /**
      * AutoExampleTwo commands
      */
     private static WaterCommand[] exampleTwoCommands = new WaterCommand[]{
-        new WaterPoint(new Position2d(new Vector2(8, 8), 0), movePointController)
+        new WaterPoint(new Position2d(new Vector2(5, 5), 0), movePointController)
     };
 
     /**

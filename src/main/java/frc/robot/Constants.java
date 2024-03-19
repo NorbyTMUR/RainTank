@@ -49,7 +49,7 @@ public final class Constants {
     public final class AutoTune{
 
         public static final double RAM_POINT_B = 1;
-        public static final double RAM_POINT_C = 0.2;
+        public static final double RAM_POINT_ZETA = 0.2;
         public static final double RAM_POINT_SCALE = 0.5;
 
         public static final Position2d RAM_POINT_DEAD_ZONE = 

@@ -1,5 +1,6 @@
 package frc.robot.Subsystems.WaterAuto.WaterCommands;
 
+import frc.robot.Constants.AutoTune;
 import frc.robot.MathUtils.Position2d;
 import frc.robot.MathUtils.RamseteController;
 import frc.robot.Subsystems.Drivetrain;
@@ -39,7 +40,7 @@ public class WaterPoint extends WaterCommand{
     @Override
     public void update(){
         //Calculates the movement from the controller based of the current position, and desired position
-        double[] movement = controller.calculate(Odometry.getPosition(), desiredPosition);
+        double[] movement = controller.calculate(Odometry.getPosition(), desiredPosition, AutoTune.RAM_POINT_SCALE);
         
         //If there is no movement, then the command is finished
         if(movement[0] + movement[1] == 0){

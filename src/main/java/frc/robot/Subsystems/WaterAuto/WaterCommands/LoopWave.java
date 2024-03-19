@@ -5,6 +5,9 @@ import java.util.function.BooleanSupplier;
 
 import frc.robot.Subsystems.WaterAuto.SubType;
 
+/**
+ * An WaterCommand that loops all the commands that it gets
+ */
 public class LoopWave extends WaterCommand{
     private WaterCommand[] allCommands;
     private int loopPhaseOn;
@@ -47,11 +50,12 @@ public class LoopWave extends WaterCommand{
      */
     @Override
     public void update(){
-        if(currentCommandIndex<allCommands.length && loopPhaseOn<loopAmount){
+        if((currentCommandIndex<allCommands.length && loopPhaseOn<loopAmount)
+        ||(conditionStop==true&&!condition.getAsBoolean())){
             allCommands[currentCommandIndex].update();
             if(allCommands[currentCommandIndex].isFinished()){
                 currentCommandIndex++;
-                if(currentCommandIndex==allCommands.length){
+                if(currentCommandIndex==allCommands.length||conditionStop==true){
                     currentCommandIndex=0;
                     loopPhaseOn++;
                     if(loopPhaseOn<loopAmount) isFinished=true;

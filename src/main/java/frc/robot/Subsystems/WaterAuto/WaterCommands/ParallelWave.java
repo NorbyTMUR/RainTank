@@ -5,6 +5,9 @@ import org.ejml.simple.UnsupportedOperation;
 
 import frc.robot.Subsystems.WaterAuto.SubType;
 
+/**
+ * An Water Command that allows two commands to run parrallel
+ */
 public class ParallelWave extends WaterCommand{
     private WaterCommand[] commands;
 
