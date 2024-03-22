@@ -19,6 +19,7 @@ public abstract class Odometry {
     public static void init(){
         //Creates the position at starting position
         position = new Vector2(OdometryConstants.ODOMETRY_START_X, OdometryConstants.ODOMETRY_START_Y);
+        currentRotation=0;
     
         zeroValues();
     }

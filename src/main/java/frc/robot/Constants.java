@@ -4,6 +4,9 @@ import frc.robot.MathUtils.Position2d;
 import frc.robot.MathUtils.Vector2;
 
 public final class Constants {
+    /**
+     * Constants of the drivetrain
+     */
     public final class DriveConstants{
         //Motor Lead Ports
         public static final int LEFT_LEADER_PORT = 0;
@@ -23,6 +26,9 @@ public final class Constants {
         public static double SIM_CONVERSION = .1;
     }
 
+    /**
+     * Constants of the odometry class
+     */
     public final class OdometryConstants{
         //Odometry start position
         public static final double ODOMETRY_START_X = 0;
@@ -32,6 +38,9 @@ public final class Constants {
         public static final double WHEEL_BASE = 3;
     }
     
+    /**
+     * Constants of the operator class
+     */
     public final class OperatorConstants{
         public static final double DEAD_ZONE = .1;
 
@@ -44,15 +53,16 @@ public final class Constants {
     }
 
     /**
-     * Tuning values 
+     * Tuning values for auto
      */
     public final class AutoTune{
+        //Tune values for the point-point ramsete controller
+        public static final double RAM_POINT_B = .4;
+        public static final double RAM_POINT_ZETA = .3;
+        public static final double RAM_POINT_SCALE = .1;
 
-        public static final double RAM_POINT_B = 1;
-        public static final double RAM_POINT_ZETA = 0.2;
-        public static final double RAM_POINT_SCALE = 0.5;
-
+        //Ramsete point-point deadzone
         public static final Position2d RAM_POINT_DEAD_ZONE = 
-            new Position2d(new Vector2(.4, .4), 1);
+            new Position2d(new Vector2(.5,.5), 1);
     }
 }

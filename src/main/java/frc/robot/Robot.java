@@ -23,7 +23,7 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void autonomousInit() {
+  public void autonomousInit(){
     WaveRunner.init(OI.getSelectedAuto());
   }
 
@@ -44,5 +44,15 @@ public class Robot extends TimedRobot {
     } else {
       Drivetrain.tankDrive(OI.getLeft(), OI.getRight());
     }
+  }
+
+  @Override
+  public void disabledPeriodic(){
+
+  }
+
+  @Override
+  public void simulationPeriodic(){
+    
   }
 }

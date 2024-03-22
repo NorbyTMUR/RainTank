@@ -41,7 +41,7 @@ public class WaterPoint extends WaterCommand{
     public void update(){
         //Calculates the movement from the controller based of the current position, and desired position
         double[] movement = controller.calculate(Odometry.getPosition(), desiredPosition, AutoTune.RAM_POINT_SCALE);
-        
+
         //If there is no movement, then the command is finished
         if(movement[0] + movement[1] == 0){
             isFinished =true;

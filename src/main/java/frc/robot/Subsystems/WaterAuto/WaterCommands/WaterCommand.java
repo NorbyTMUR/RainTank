@@ -1,3 +1,4 @@
+
 package frc.robot.Subsystems.WaterAuto.WaterCommands;
 import frc.robot.Subsystems.WaterAuto.SubType;
 
@@ -38,4 +39,9 @@ public abstract class WaterCommand {
     public boolean isFinished(){ 
         return isFinished; 
     }
+
+    /**
+     * Final code to run when the command is finished
+     */
+    public void whenFinished(){}
 }

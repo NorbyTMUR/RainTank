@@ -49,6 +49,14 @@ public class Position2d {
     }
 
     /**
+     * Times two position2d
+     * @param other The position2d to mutiply on the righthand side
+     * @return A new position2d that has been mutiply
+     */
+    public Position2d mult(Position2d other){
+        return new Position2d(position.mult(other.getPosition()), rotation*other.getRotation());
+    }
+    /**
      * Adds a value to an angle
      * @param angle A double of the current angle in radians
      * @param add A double of the angle to add in radians

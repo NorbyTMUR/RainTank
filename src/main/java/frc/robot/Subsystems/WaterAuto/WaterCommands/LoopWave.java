@@ -73,7 +73,6 @@ public class LoopWave extends WaterCommand{
         HashSet<SubType> requirements = new HashSet<>();
         for (WaterCommand command : commands) {
             for (SubType subType : command.getRequirements()) {
-                int size = requirements.size();
                 requirements.add(subType);
             }
         }

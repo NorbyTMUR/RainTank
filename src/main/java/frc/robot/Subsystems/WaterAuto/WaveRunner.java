@@ -1,6 +1,5 @@
 package frc.robot.Subsystems.WaterAuto;
 
-import frc.robot.Constants.AutoTune;
 import frc.robot.MathUtils.Position2d;
 import frc.robot.MathUtils.RamseteController;
 import frc.robot.MathUtils.Vector2;
@@ -27,7 +26,9 @@ public abstract class WaveRunner{
      * AutoExampleOne commands
      */
     private static WaterCommand[] exampleOneCommands = new WaterCommand[]{
-       new WaterPoint(new Position2d(new Vector2(8, 8), 0), movePointController)
+       new WaterPoint(new Position2d(new Vector2(16, 6), .1), movePointController),
+       new WaterPoint(new Position2d(new Vector2(0, 0), 1), movePointController),
+       new WaterPoint(new Position2d(new Vector2(16, 0), 2), movePointController),
     };
 
     /**

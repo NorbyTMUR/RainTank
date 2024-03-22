@@ -2,7 +2,6 @@ package frc.robot.Subsystems.WaterAuto.WaterCommands;
 import java.util.HashSet;
 
 import org.ejml.simple.UnsupportedOperation;
-
 import frc.robot.Subsystems.WaterAuto.SubType;
 
 /**
