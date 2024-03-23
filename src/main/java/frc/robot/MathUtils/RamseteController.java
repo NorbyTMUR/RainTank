@@ -33,24 +33,19 @@ public class RamseteController {
         // Calculate error
         Position2d error = desiredRobotPosition.sub(currentRobotPosition);
         if (isInDeadZone(error)) return new double[2];
-
-        error = new Position2d(error.getPosition().rotate(error.getRotation()), error.getRotation());
-        
+        error = makeLocal(error);
+        System.out.println(error.getPosition()+" "+error.getRotation());
         double k = 2*zeta*Math.sqrt(Math.pow(w,2)+(b*Math.pow(v, 2)));
 
-        double outputV = v*Math.cos(error.getRotation())+k*error.getPosition().getX()/5;
+        double outputV = v*Math.cos(error.getRotation())+k*error.getPosition().getX();
         double outputW = w+k*error.getRotation()+(b*v*Math.sin(error.getRotation())*error.getPosition().getY())/error.getRotation();
 
-        SmartDashboard.putNumber("k", k);
-        SmartDashboard.putNumber("v", v);
-        SmartDashboard.putNumber("w", w);
-        SmartDashboard.putNumber("v1", outputV);
-        SmartDashboard.putNumber("w1", outputW);
-        SmartDashboard.putNumber("x", error.getPosition().getX());
-        SmartDashboard.putNumber("y", error.getPosition().getX());
-        SmartDashboard.putNumber("rot", error.getRotation());
+        SmartDashboard.putNumber("X", error.getPosition().getX());
+        SmartDashboard.putNumber("Y", error.getPosition().getY());
+        SmartDashboard.putNumber("Rot", error.getRotation());
 
-        double[] movement = new double[]{outputV-outputW, outputV+outputW};
+
+        double[] movement = new double[]{outputV+outputW, outputV-outputW};
         return movement;
     }
 
