@@ -3,7 +3,7 @@ package frc.robot.Subsystems;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
-import frc.robot.Constants;
+import frc.robot.Constants; 
 
 /**
  * Class that controls the pneumatics on the cannon shooter
@@ -17,7 +17,7 @@ public abstract class CannonShooter{
      */
     public static void init(){
         releaseSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.SolenoidPort);
-        compressor = new Compressor(PneumaticsModuleType.CTREPCM);
+        compressor = new Compressor(PneumaticsModuleType.REVPH);
     }
 
     /**
@@ -32,14 +32,14 @@ public abstract class CannonShooter{
         }
             
         //Toggles the compressor
-        if(OI.compressorPressed()) toggleCompressor();
+        if(compressor.isEnabled()) toggleCompressor();
     }
 
     /**
      * Toggels the Compressor
      */
     private static void toggleCompressor(){
-        if(OI.compressorPressed()){
+        if(compressor.isEnabled()){
             if(isEnabled()){
                 compressor.disable();
             } else {
@@ -56,6 +56,7 @@ public abstract class CannonShooter{
         return compressor.getPressure();
     }
 
+    //We are only allowed to run it at 100 PSI max; it can only operate at 120 PSI max.
     /**
      * Gets the current draw of the Compresser
      * @return A double of the current draw of the Compresser
