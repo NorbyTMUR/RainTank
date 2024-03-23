@@ -69,6 +69,4 @@ public final class Constants {
 
     public static final int fireButton = 1;
     public static final int compressorButton = 2; 
-    public static final int SolenoidPort = 0;
-    public static final double pressureToFire = 10;
 }

@@ -25,7 +25,7 @@ public abstract class CannonShooter{
      */
     public static void update(){
         //If the fire button is pressed and there is enough pressure
-        if(OI.firedPressed() && getPressure()>Constants.pressureToFire){
+        if(OI.firedPressed()){
             releaseSolenoid.set(true);
         } else {
             releaseSolenoid.set(false);
