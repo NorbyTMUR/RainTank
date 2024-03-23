@@ -1,21 +1,24 @@
 package frc.robot.Subsystems;
 
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.Pneumatics;
 import frc.robot.Subsystems.WaterAuto.WaveRunner;
 
 public abstract class OI {
     private static SendableChooser<String> controlModeSelector = new SendableChooser<>(); 
     private static SendableChooser<String> autoSelector = new SendableChooser<>();
     private static Joystick joystick;
-
+    public static AnalogPotentiometer pressureTransducer;
     /**
      * Inits the OI class
      */
     public static void init(){
         //Sets up the controlModeSelector
+        pressureTransducer = new AnalogPotentiometer(Pneumatics.AnalogInPort, Pneumatics.kScale, Pneumatics.kOffset);
         controlModeSelector.setDefaultOption("ArcadeDrive", "ArcadeDrive");
         controlModeSelector.addOption("TankDrive", "TankDrive");
         SmartDashboard.putData("ControlMode", controlModeSelector);
@@ -96,5 +99,12 @@ public abstract class OI {
      */
     public static boolean isArcadeDrive(){
         return controlModeSelector.getSelected() == "ArcadeDrive";
+    }
+
+    public static boolean firedPressed(){
+        if(pressureTransducer.get()>Pneumatics.pressureRequired){
+            return true;
+        }
+        return false;
     }
 }
