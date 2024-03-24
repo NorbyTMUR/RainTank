@@ -15,19 +15,19 @@ public class Robot extends TimedRobot {
     OI.init();
     Odometry.init();
     Telemetry.init();
-    CannonShooter.init();
+    //CannonShooter.init();
   }
 
   @Override
   public void robotPeriodic() {
     Odometry.update();
     Telemetry.update();
-    CannonShooter.update();
+    //CannonShooter.update();
   }
 
   @Override
   public void autonomousInit(){
-    WaveRunner.init(OI.getSelectedAuto());
+   WaveRunner.init(OI.getSelectedAuto());
   }
 
   @Override
@@ -37,7 +37,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    Odometry.init();
+    //Odometry.init();
   }
 
   @Override

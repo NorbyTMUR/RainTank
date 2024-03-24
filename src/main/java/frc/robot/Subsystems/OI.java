@@ -3,6 +3,7 @@ package frc.robot.Subsystems;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.Subsystems.WaterAuto.WaveRunner;
 
@@ -96,5 +97,21 @@ public abstract class OI {
      */
     public static boolean isArcadeDrive(){
         return controlModeSelector.getSelected() == "ArcadeDrive";
+    }
+
+    /**
+     * Sees if the fire button has been pressed
+     * @return A boolean that is true if the firebutton is pressed
+     */
+    public static boolean firedPressed(){
+        return joystick.getRawButton(Constants.fireButton);
+    }
+
+    /**
+     * Sees if the compresser button has been pressed
+     * @return A boolean that is true if the compresser is pressed
+     */
+    public static boolean compressorPressed(){
+        return joystick.getRawButton(Constants.compressorButton);
     }
 }

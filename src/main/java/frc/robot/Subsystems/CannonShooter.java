@@ -3,6 +3,7 @@ package frc.robot.Subsystems;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
 /**
@@ -16,8 +17,8 @@ public abstract class CannonShooter{
      * Inits the Cannon Shooter Class
      */
     public static void init(){
-        releaseSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.SolenoidPort);
-        compressor = new Compressor(PneumaticsModuleType.CTREPCM);
+        releaseSolenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.SolenoidPort);
+        compressor = new Compressor(PneumaticsModuleType.REVPH);
     }
 
     /**
@@ -30,6 +31,8 @@ public abstract class CannonShooter{
         } else {
             releaseSolenoid.set(false);
         }
+        SmartDashboard.putNumber("pressure", getPressure());
+        SmartDashboard.putNumber("corrent", getCurrent());
             
         //Toggles the compressor
         if(OI.compressorPressed()) toggleCompressor();

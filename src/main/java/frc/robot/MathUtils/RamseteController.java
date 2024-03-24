@@ -44,7 +44,6 @@ public class RamseteController {
         SmartDashboard.putNumber("Y", error.getPosition().getY());
         SmartDashboard.putNumber("Rot", error.getRotation());
 
-
         double[] movement = new double[]{outputV+outputW, outputV-outputW};
         return movement;
     }
