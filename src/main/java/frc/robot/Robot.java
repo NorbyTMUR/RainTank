@@ -15,14 +15,13 @@ public class Robot extends TimedRobot {
     OI.init();
     Odometry.init();
     Telemetry.init();
-    //CannonShooter.init();
+    CannonShooter.init();
   }
 
   @Override
   public void robotPeriodic() {
     Odometry.update();
     Telemetry.update();
-    //CannonShooter.update();
   }
 
   @Override
@@ -37,7 +36,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    //Odometry.init();
+    Odometry.init();
   }
 
   @Override
@@ -47,6 +46,9 @@ public class Robot extends TimedRobot {
     } else {
       Drivetrain.tankDrive(OI.getLeft(), OI.getRight());
     }
+
+    if(OI.firedPressed()) CannonShooter.fire();
+    if(OI.firedReleased()) CannonShooter.fireDisabled();
   }
 
   @Override

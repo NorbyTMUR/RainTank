@@ -1,24 +1,22 @@
 package frc.robot;
 
-import edu.wpi.first.math.controller.RamseteController;
 import frc.robot.MathUtils.Position2d;
 import frc.robot.MathUtils.Vector2;
 
 public final class Constants {
     /**
+     * Constants of the Pneumatics
+     */
+    public final class PneumaticsConstants{
+        public static final int SOLENOID_PORT = 0;
+        public static final double MIN_PRESSURE = 95;
+        public static final double MAX_PRESSURE = 100;
+        public static final double PRESSURE_TO_FIRE = 95; 
+    }
+
+    /**
      * Constants of the drivetrain
      */
-    public final class Pneumatics{
-        // External analog pressure sensor
-        // product-specific voltage->pressure conversion, see product manual
-        // in this case, 250(V/5)-25
-        // the scale parameter in the AnalogPotentiometer constructor is scaled from 1 instead of 5,
-        // so if r is the raw AnalogPotentiometer output, the pressure is 250r-25
-        public static final int AnalogInPort = 1;
-        public static final double kScale = 250;
-        public static final double kOffset = -25;
-        public static final double pressureRequired = 1;
-    }
     public final class DriveConstants{
         //Motor Lead Ports
         public static final int LEFT_LEADER_PORT = 0;
@@ -62,6 +60,9 @@ public final class Constants {
 
         public static final int LEFT_AXIS = 2;
         public static final int RIGHT_AXIS = 3;
+
+        public static final int COMPRESSOR_TOGGLE_BUTTON = 2;
+        public static final int FIRE_BUTTON = 0;
     }
  
     /**
@@ -77,8 +78,5 @@ public final class Constants {
         public static final Position2d RAM_POINT_DEAD_ZONE = 
             new Position2d(new Vector2(1,1), 1);
     }
-
-    public static final int fireButton = 1;
-    public static final int compressorButton = 2;
-    public static final int SolenoidPort = 0; 
+    
 }

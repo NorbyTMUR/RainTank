@@ -3,8 +3,7 @@ package frc.robot.Subsystems;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants;
+import frc.robot.Constants.PneumaticsConstants;
 
 /**
  * Class that controls the pneumatics on the cannon shooter
@@ -17,37 +16,34 @@ public abstract class CannonShooter{
      * Inits the Cannon Shooter Class
      */
     public static void init(){
-        releaseSolenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.SolenoidPort);
+        releaseSolenoid = new Solenoid(PneumaticsModuleType.REVPH, PneumaticsConstants.SOLENOID_PORT);
         compressor = new Compressor(PneumaticsModuleType.REVPH);
     }
 
     /**
-     * Updates the CannonShooter class;
+     * Fires the CannonShooter;
      */
-    public static void update(){
-        //If the fire button is pressed and there is enough pressure
-        if(OI.firedPressed()){
+    public static void fire(){
+        if(compressor.getPressure()>PneumaticsConstants.PRESSURE_TO_FIRE){
             releaseSolenoid.set(true);
-        } else {
-            releaseSolenoid.set(false);
         }
-        SmartDashboard.putNumber("pressure", getPressure());
-        SmartDashboard.putNumber("corrent", getCurrent());
-            
-        //Toggles the compressor
-        if(OI.compressorPressed()) toggleCompressor();
-    }
+    }  
+
+    /**
+     * Disables the solenoid on the CannonShooter;
+     */
+    public static void fireDisabled(){
+        releaseSolenoid.set(false);
+    }  
 
     /**
      * Toggels the Compressor
      */
-    private static void toggleCompressor(){
-        if(OI.compressorPressed()){
-            if(isEnabled()){
-                compressor.disable();
-            } else {
-                compressor.enableDigital();
-            }
+    public static void toggleCompressor(){
+        if(isEnabled()){
+            compressor.disable();
+        } else {
+            compressor.enableAnalog(PneumaticsConstants.MIN_PRESSURE, PneumaticsConstants.MAX_PRESSURE);
         }
     }
 
