@@ -3,7 +3,6 @@ package frc.robot.Subsystems;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.Subsystems.WaterAuto.WaveRunner;
 
@@ -104,7 +103,15 @@ public abstract class OI {
      * @return A boolean that is true if the firebutton is pressed
      */
     public static boolean firedPressed(){
-        return joystick.getRawButton(Constants.fireButton);
+        return joystick.getRawButtonPressed(OperatorConstants.FIRE_BUTTON);
+    }
+
+    /**
+     * Sees if the fire button has been released
+     * @return A boolean that is true if the firebutton is released
+     */
+    public static boolean firedReleased(){
+        return joystick.getRawButtonReleased(OperatorConstants.FIRE_BUTTON);
     }
 
     /**
@@ -112,6 +119,6 @@ public abstract class OI {
      * @return A boolean that is true if the compresser is pressed
      */
     public static boolean compressorPressed(){
-        return joystick.getRawButton(Constants.compressorButton);
+        return joystick.getRawButton(OperatorConstants.COMPRESSOR_TOGGLE_BUTTON);
     }
 }
