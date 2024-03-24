@@ -8,6 +8,17 @@ public final class Constants {
     /**
      * Constants of the drivetrain
      */
+    public final class Pneumatics{
+        // External analog pressure sensor
+        // product-specific voltage->pressure conversion, see product manual
+        // in this case, 250(V/5)-25
+        // the scale parameter in the AnalogPotentiometer constructor is scaled from 1 instead of 5,
+        // so if r is the raw AnalogPotentiometer output, the pressure is 250r-25
+        public static final int AnalogInPort = 1;
+        public static final double kScale = 250;
+        public static final double kOffset = -25;
+        public static final double pressureRequired = 1;
+    }
     public final class DriveConstants{
         //Motor Lead Ports
         public static final int LEFT_LEADER_PORT = 0;
